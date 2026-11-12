@@ -1,0 +1,8 @@
+issue_type,risk_level
+EHR Login Issue,Medium
+Medical Imaging Viewer Not Loading (PACS X-ray MRI CT images),Low
+Medication Dispensing Cabinet Access Request,High
+E-Prescribing Token Not Working (electronic prescription signing),High
+Patient Portal Login Issue,Medium
+Patient Record Access Request (medical records information),High
+Clinical Workstation Badge Tap Session Roaming Issue,Low

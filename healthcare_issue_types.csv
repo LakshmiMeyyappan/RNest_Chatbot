@@ -1,0 +1,8 @@
+bucket,issue_type
+Healthcare IT,EHR Login Issue
+Healthcare IT,Medical Imaging Viewer Not Loading (PACS X-ray MRI CT images)
+Healthcare IT,Medication Dispensing Cabinet Access Request
+Healthcare IT,E-Prescribing Token Not Working (electronic prescription signing)
+Healthcare IT,Patient Portal Login Issue
+Healthcare IT,Patient Record Access Request (medical records information)
+Healthcare IT,Clinical Workstation Badge Tap Session Roaming Issue

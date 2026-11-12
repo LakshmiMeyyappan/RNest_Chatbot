@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RNest Care Assistant</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+  html,body{height:100%;background:#eef2f4}
+  .chat{display:flex;flex-direction:column;height:100%;max-width:720px;margin:0 auto;background:#fff;
+    box-shadow:0 0 24px rgba(0,0,0,.08)}
+  header{background:#0f766e;color:#fff;padding:14px 18px;display:flex;align-items:center;gap:12px}
+  .av{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;
+    align-items:center;justify-content:center;font-weight:700}
+  header b{display:block;font-size:16px}
+  header span{font-size:12px;opacity:.9}
+  header span:before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
+    background:#4ade80;margin-right:5px}
+  #msgs{flex:1;overflow-y:auto;padding:16px;background:#f6f8f9}
+  .m{max-width:80%;padding:10px 14px;border-radius:14px;font-size:14.5px;line-height:1.5;
+    margin-bottom:12px;white-space:pre-wrap;word-wrap:break-word}
+  .bot{background:#fff;color:#1f2933;border:1px solid #e3e8ec;border-bottom-left-radius:4px}
+  .user{background:#0f766e;color:#fff;margin-left:auto;border-bottom-right-radius:4px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+  .chip{border:1px solid #0f766e;color:#0f766e;background:#fff;border-radius:18px;padding:7px 13px;
+    font-size:13px;cursor:pointer}
+  .chip:hover{background:#0f766e;color:#fff}
+  .dots span{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;
+    background:#9aa5b1;animation:b 1.2s infinite}
+  .dots span:nth-child(2){animation-delay:.2s}
+  .dots span:nth-child(3){animation-delay:.4s}
+  @keyframes b{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+  form{display:flex;gap:8px;padding:12px;border-top:1px solid #e3e8ec;background:#fff}
+  input{flex:1;border:1px solid #d5dbe0;border-radius:24px;padding:11px 16px;font-size:15px;outline:none}
+  input:focus{border-color:#0f766e}
+  button.send{width:44px;height:44px;border-radius:50%;border:0;background:#0f766e;color:#fff;cursor:pointer;
+    display:flex;align-items:center;justify-content:center}
+  button.send:disabled{opacity:.5;cursor:default}
+  .foot{text-align:center;font-size:11.5px;color:#7b8794;padding:0 12px 10px;background:#fff}
+</style>
+</head>
+<body>
+<div class="chat">
+  <header>
+    <div class="av">R</div>
+    <div><b>RNest Care Assistant</b><span>Online</span></div>
+  </header>
+  <div id="msgs"></div>
+  <form id="form">
+    <input id="inp" type="text" placeholder="Type your question..." maxlength="500" autocomplete="off">
+    <button class="send" id="btn" type="submit" aria-label="Send">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+    </button>
+  </form>
+  <div class="foot">Not medical advice. In an emergency, call your local emergency number.</div>
+</div>
+
+<script>
+  var msgs = document.getElementById("msgs");
+  var inp = document.getElementById("inp");
+  var btn = document.getElementById("btn");
+  var busy = false;
+
+  function add(who, text) {
+    var d = document.createElement("div");
+    d.className = "m " + who;
+    d.textContent = text;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  add("bot", "Hi! I'm the RNest Care assistant. Ask me about our services, care plans and how to get started.");
+
+  var chips = document.createElement("div");
+  chips.className = "chips";
+  ["How much is Plus Care?", "What services do you offer?", "Which cities do you serve?", "How do I contact RNest?"]
+    .forEach(function (q) {
+      var b = document.createElement("button");
+      b.className = "chip"; b.type = "button"; b.textContent = q;
+      b.onclick = function () { send(q); };
+      chips.appendChild(b);
+    });
+  msgs.appendChild(chips);
+
+  async function send(text) {
+    text = (text || "").trim();
+    if (!text || busy) return;
+    busy = true; btn.disabled = true;
+    chips.remove();
+    add("user", text);
+    inp.value = "";
+
+    var typing = document.createElement("div");
+    typing.className = "m bot dots";
+    typing.innerHTML = "<span></span><span></span><span></span>";
+    msgs.appendChild(typing);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    try {
+      var r = await fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: text })
+      });
+      if (!r.ok) throw new Error("bad status");
+      var d = await r.json();
+      typing.remove();
+      add("bot", d.answer);
+    } catch (e) {
+      typing.remove();
+      add("bot", "Sorry, something went wrong. Please try again or contact RNest at +91 73063 30330.");
+    }
+    busy = false; btn.disabled = false; inp.focus();
+  }
+
+  document.getElementById("form").onsubmit = function (e) {
+    e.preventDefault();
+    send(inp.value);
+  };
+</script>
+</body>
+</html>

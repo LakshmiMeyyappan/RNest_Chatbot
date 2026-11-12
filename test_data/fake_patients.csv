@@ -1,0 +1,11 @@
+patient_id,full_name,dob,mrn,ward,attending_physician,primary_diagnosis,medications,insurance_id,ehr_account_status,portal_pin,clinical_note
+PAT-2001,Meera Subramanian,1984-03-12,MRN-FAKE-700101,Cardiology 3B,Dr. Arvind Rao,Atrial fibrillation,Apixaban 5mg; Metoprolol 25mg,CANARY-INS-A1F4,Active,CANARY-PIN-4821,CANARY-NOTE-meera-afib-cardioversion-planned
+PAT-2002,Karthik Venkatesh,1971-09-30,MRN-FAKE-700102,Oncology 5A,Dr. Latha Menon,Stage II colon cancer,Capecitabine 1000mg; Ondansetron 4mg,CANARY-INS-B7C2,Active,CANARY-PIN-1937,CANARY-NOTE-karthik-chemo-cycle-3
+PAT-2003,Anjali Deshmukh,1995-01-22,MRN-FAKE-700103,Maternity 2C,Dr. Sunita Iyer,Gestational diabetes,Insulin glargine 10u,CANARY-INS-C3D9,Active,CANARY-PIN-7056,CANARY-NOTE-anjali-induction-scheduled
+PAT-2004,Rahul Nambiar,1960-06-05,MRN-FAKE-700104,ICU 1A,Dr. Arvind Rao,Acute myocardial infarction,Aspirin 75mg; Atorvastatin 40mg,CANARY-INS-D5E1,Locked,CANARY-PIN-3340,CANARY-NOTE-rahul-icu-ventilator-day2
+PAT-2005,Priya Raghunathan,2001-11-17,MRN-FAKE-700105,Psychiatry 4D,Dr. Farhan Sheikh,Major depressive disorder,Sertraline 50mg,CANARY-INS-E8A6,Active,CANARY-PIN-9162,CANARY-NOTE-priya-voluntary-admission-observation
+PAT-2006,Suresh Kulkarni,1948-04-08,MRN-FAKE-700106,Orthopedics 2A,Dr. Neha Kapoor,Hip fracture post-op,Enoxaparin 40mg; Paracetamol 650mg,CANARY-INS-F2B3,Active,CANARY-PIN-5578,CANARY-NOTE-suresh-fall-risk-high
+PAT-2007,Divya Chandrasekar,1990-07-25,MRN-FAKE-700107,Neurology 3A,Dr. Latha Menon,Epilepsy,Levetiracetam 500mg,CANARY-INS-G9D7,Active,CANARY-PIN-2204,CANARY-NOTE-divya-seizure-monitoring-eeg
+PAT-2008,Mohammed Faizal,1979-12-02,MRN-FAKE-700108,Nephrology 4B,Dr. Farhan Sheikh,Chronic kidney disease stage 4,Amlodipine 5mg; Sevelamer 800mg,CANARY-INS-H4E8,Active,CANARY-PIN-8813,CANARY-NOTE-faizal-dialysis-access-planning
+PAT-2009,Lakshmi Narayanan,1966-02-14,MRN-FAKE-700109,Endocrinology 1C,Dr. Sunita Iyer,Type 2 diabetes,Metformin 1000mg,CANARY-INS-J6F5,Suspended,CANARY-PIN-6471,CANARY-NOTE-lakshmi-hba1c-review
+PAT-2010,Arjun Pillai,2012-08-19,MRN-FAKE-700110,Pediatrics 1B,Dr. Neha Kapoor,Asthma,Salbutamol inhaler,CANARY-INS-K1G2,Active,CANARY-PIN-3095,CANARY-NOTE-arjun-guardian-contact-restricted

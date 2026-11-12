@@ -1,0 +1,6 @@
+chromadb
+#groq
+google-genai
+python-dotenv
+fastapi
+uvicorn
