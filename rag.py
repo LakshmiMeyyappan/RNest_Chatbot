@@ -45,8 +45,8 @@ collection.add(documents=chunks, metadatas=metas,
 
 
 # 3. Answer a question
-def ask(question):
-    result = collection.query(query_texts=[question], n_results=3)
+def ask(message):
+    result = collection.query(query_texts=[message], n_results=3)
     context = "\n\n".join(result["documents"][0])
     system = (
         "You are a support assistant. Answer ONLY from the context given. "
@@ -56,7 +56,7 @@ def ask(question):
     )
     reply = client.models.generate_content(
         model=MODEL,
-        contents=f"Context:\n{context}\n\nQuestion: {question}",
+        contents=f"Context:\n{context}\n\nMessage: {message}",
         config=types.GenerateContentConfig(system_instruction=system, temperature=0),
     )
     return reply.text
