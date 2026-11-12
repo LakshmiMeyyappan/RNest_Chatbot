@@ -11,6 +11,17 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"],
 class Question(BaseModel):
     question: str
 
+import os
+from helpdesk_vuln import ask_vuln
+
+BOT_MODE = os.getenv("BOT_MODE", "vuln")
+
+@app.post("/chat")
+def chat(body: Question):
+    if BOT_MODE == "vuln":
+        return {"answer": ask_vuln(body.question)}
+    return {"answer": ask(body.question)}
+
 @app.post("/chat")
 def chat(body: Question):
     return {"answer": ask(body.question)}
@@ -22,3 +33,4 @@ def health():
 @app.get("/")
 def home():
     return FileResponse("widget.html")
+
